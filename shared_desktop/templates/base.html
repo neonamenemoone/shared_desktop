@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html> 
 <html lang="ru">          
   <head>
@@ -5,25 +6,25 @@
     <!-- Сайт готов работать с мобильными устройствами -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Загружаем фав-иконки -->
-    <link rel="icon" href="img/fav/fav.ico" type="image">
-    <link rel="apple-touch-icon" sizes="180x180" href="img/fav/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/fav/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/fav/favicon-16x16.png">
+    <link rel="icon" href="{% static 'img/fav/fav.ico' %}" type="image">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/fav/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/fav/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/fav/favicon-16x16.png' %}">
     <meta name="msapplication-TileColor" content="#000">
     <meta name="theme-color" content="#ffffff">
     <!-- Подключен файл со стандартными стилями бустрап -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <title>Общий рабочий стол.</title>    
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"> 
+    <title>Общий рабочий стол</title>    
   </head>
-  <body>       
+  <body data-bs-theme="dark">     
     <header>
       {% include 'includes/header.html' %}
     </header>
-    <main>
-      {% block content %}
-        Контент не подвезли :(
-      {% endblock %}
-    </main>
+      <main>
+        {% block content %}
+          <h1>{{ text }}</h1>
+        {% endblock %}
+      </main>
     <footer>
       {% include 'includes/footer.html' %} 
     </footer>

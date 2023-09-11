@@ -4,7 +4,11 @@ from django.shortcuts import render
 
 def index(request):
     template = 'board/index.html'
-    return render(request, template) 
+    text = 'Правила'
+    context = {
+        'text': text,
+    }
+    return render(request, template, context) 
 
 def rules_list(request):
     return HttpResponse('Правила')

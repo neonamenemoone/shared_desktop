@@ -8,7 +8,7 @@ SECRET_KEY = 'm$2o*l$f7x7hq5u@#y&im4%057ad0wmc07%2ze1*kb7%io_n16'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'board.apps.BoardConfig',
@@ -83,4 +83,5 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_URL = '/static/'
