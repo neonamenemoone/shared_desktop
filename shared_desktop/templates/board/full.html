@@ -2,6 +2,12 @@
 {% block content %}
 {% for rule in rules %}
   <ul>
+    <li>
+      {{ rule.author.get_full_name }}
+    </li>
+    <li>
+      {{ rule.pub_date|date:"d E Y" }}
+    </li>
   </ul>
   <p>{{ rule.text }}</p>
   {% if not forloop.last %}<hr>{% endif %}
