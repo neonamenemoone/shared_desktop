@@ -5,5 +5,35 @@
         <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
         <span style="color:white">Общий рабочий стол
         </a>
+        <ul class="nav nav-pills">
+          <li class="nav-item"> 
+            {% if request.path == '/full/' %}
+              <a class="nav-link" href="{% url 'rules:rules' %}">Обычный вид</a>
+            {% else %}
+              <a class="nav-link" href="{% url 'rules:full' %}">Расширенный вид</a>
+            {% endif %}
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="<!--  -->">Технологии</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item"> 
+              <a class="nav-link" href="<!--  -->">Новая запись</a>
+          </li>
+          <li class="nav-item"> 
+              <a class="nav-link link-light" href="{% url 'users:logout' %}">Выйти</a>
+          </li>
+          <li>
+              Пользователь: {{ user.username }}
+          </li>
+          {% else %}
+          <li class="nav-item"> 
+              <a class="nav-link link-light" href="{% url 'users:login' %}">Войти</a>
+          </li>
+          <li class="nav-item"> 
+              <a class="nav-link link-light" href="<!--  -->">Регистрация</a>
+          </li>
+          {% endif %}
+          </ul>
     </div>
 </nav>

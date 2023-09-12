@@ -8,7 +8,7 @@ app_name = 'rules'
 
 urlpatterns = [
     path('', views.index, name='rules'),
-    path('full/', views.full, name='full_rules'),
+    path('full/', views.full, name='full'),
     path('rules/', views.rules_list, name='rule'),
     path('rules/<pk>/', views.rules_detail),
 ]
