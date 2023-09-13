@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 def prog(request):
     """Программирование ДК."""
-    template = 'prog/index.html'
+    template = 'prog/prog.html'
     prog = 'programs'
     context = {
         'prog': prog,

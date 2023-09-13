@@ -1,7 +1,7 @@
 {% load static %}
 <nav class="navbar navbar-light" style="background-color: black">
     <div class="container">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="{% url 'rules:rules' %}">
         <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
         <span style="color:white">Общий рабочий стол
         </a>
@@ -9,17 +9,26 @@
           <li class="nav-item"> 
             {% if request.path == '/full/' %}
               <a class="nav-link active" href="{% url 'rules:rules' %}">Обычный вид</a>
-              
-            {% else %}
+            {% elif request.path == '/' %}
               <a class="nav-link" href="{% url 'rules:full' %}">Расширенный вид</a>
+            {% else %}
+              <a class="nav-link" href="{% url 'rules:rules' %}">Главная</a>
             {% endif %}
           </li>
           <li class="nav-item">
+            {% if request.path == '/prog/' %}
+              <a class="nav-link active" href="{% url 'prog:prog' %}">Программирование ДК</a>
+            {% else %}
               <a class="nav-link" href="{% url 'prog:prog' %}">Программирование ДК</a>
+            {% endif %}
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item"> 
+            {% if request.path == '/tools/' %}
+              <a class="nav-link active" href="{% url 'tools:tools' %}">Инструменты</a>
+            {% else %}
               <a class="nav-link" href="{% url 'tools:tools' %}">Инструменты</a>
+            {% endif %}
           </li>
           <li class="nav-item"> 
               <a class="nav-link link-light" href="{% url 'users:logout' %}">Выйти</a>

@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 def prog(request):
     """Инструменты."""
-    template = 'tools/index.html'
+    template = 'tools/tools.html'
     tools = 'tools'
     context = {
         'tools': tools,
