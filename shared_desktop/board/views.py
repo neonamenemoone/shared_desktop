@@ -15,7 +15,6 @@ def index(request):
     }
     return render(request, template, context)
 
-
 @login_required
 def full(request):
     """Главная страница с метаданными."""

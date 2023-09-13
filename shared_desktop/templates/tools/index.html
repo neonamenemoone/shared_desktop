@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+{% for rule in rules %}
+  <ul>
+  </ul>
+  <p>{{ rule.text }}</p>
+  {% if not forloop.last %}<hr>{% endif %}
+{% endfor %} 
+{% endblock %}
