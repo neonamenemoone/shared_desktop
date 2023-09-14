@@ -14,19 +14,19 @@
     <title>Общий рабочий стол</title>    
   </head>
   <body data-bs-theme="dark">
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>  
     <header>
       {% include 'includes/header.html' %}
     </header>
       <main>
-        <div class="container rounded bg-primary border p-1">
+        {% comment %} <div class="container rounded bg-primary border p-1"> {% endcomment %}
           {% block content %}
             <h1>{{ text }}</h1>
           {% endblock %}
-        </div>
+        {% comment %} </div> {% endcomment %}
       </main>
     <footer>
       {% include 'includes/footer.html' %} 
     </footer>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
   </body>
 </html>

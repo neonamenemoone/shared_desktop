@@ -1,15 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
+<ul>
+</ul>
 {% for rule in rules %}
-  <ul>
-    <li>
-      {{ rule.author.get_full_name }}
-    </li>
-    <li>
-      {{ rule.pub_date|date:"d E Y" }}
-    </li>
-  </ul>
-  <p>{{ rule.text }}</p>
-  {% if not forloop.last %}<hr>{% endif %}
+
+  <div class="container rounded bg-primary">
+    <p>{{ rule.name }}</p>
+
+    <div class="container rounded bg-primary">
+      <ul>
+        <li>
+          {{ rule.author.get_full_name }}
+        </li>
+        <li>
+          {{ rule.pub_date|date:"d E Y" }}
+        </li>
+      </ul>
+      <p><pre>{{ rule.text }}</pre></p>
+    </div>
+
+  </div>
+
+  {% if not forloop.last %}{% endif %}
+
 {% endfor %} 
 {% endblock %}

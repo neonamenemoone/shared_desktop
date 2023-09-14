@@ -1,20 +1,57 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <div class="container">
   <div class="row">
     <div class="container">
       <div class="row">
         <!-- Левая часть страницы - список тем -->
-        <div class="col-md-3">
-          <ul class="list-group">
-            <li class="list-group-item" onclick="toggleSubtopics(this)">Паспорт</li>
-            <ul class="list-group subtopics">
-              <li class="list-group-item">Схема расположения оборудования</li>
-              <li class="list-group-item">Направления</li>
-              <li class="list-group-item">Фиксированные таблицы планов</li>
-            </ul>
-          </ul>
+
+        <div class="col-md-2">
+          <select class="form-select" aria-label="Паспорт">
+            <option selected>Паспорт</option>
+            <option value="1">Схема расположения оборудования</option>
+            <option value="2">Таблица направлений</option>
+            <option value="3">Изображения фаз</option>
+            <option value="4">Таблицы фиксированных программ</option>
+            <option value="5">Схема расположения детекторв</option>
+            <option value="6">Таблица детекторов</option>
+            <option value="7">Контроль периферийного оборудования</option>
+            <option value="8">Чередование фаз</option>
+            <option value="9">Таблицы адаптивных программ</option>
+          </select>
+          <select class="form-select" aria-label="Peek">
+            <option selected>Peek</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+          <select class="form-select" aria-label="Swarco">
+            <option selected>Swarco</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+          <select class="form-select" aria-label="Поток">
+            <option selected>Поток</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+          <select class="form-select" aria-label="Sice">
+            <option selected>Sice</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+          <select class="form-select" aria-label="Сигнал">
+            <option selected>Сигнал</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
         </div>
+
         <!-- Правая часть страницы - текстовое описание -->
         <div class="col-md-9">
           <p>Здесь будет текстовое описание выбранной темы.</p>
