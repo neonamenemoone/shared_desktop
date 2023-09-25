@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  shared_desktop-backend-1:
+
+    build: ./shared_desktop/
+    env_file: ./shared_desktop/.env
+
+  gateway:
+
+    build: ./shared_desktop/gateway/
+    ports:
+      - 8000:80
