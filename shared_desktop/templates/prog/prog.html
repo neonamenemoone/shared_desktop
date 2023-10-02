@@ -1,68 +1,18 @@
+
 {% extends 'base.html' %}
 {% block content %}
 
 <div class="container">
   <div class="row">
-    <div class="container">
-      <div class="row">
-        <!-- Левая часть страницы - список тем -->
 
-        <div class="col-md-2">
-          <select class="form-select" aria-label="Паспорт">
-            <option selected>Паспорт</option>
-            <option value="1">Схема расположения оборудования</option>
-            <option value="2">Таблица направлений</option>
-            <option value="3">Изображения фаз</option>
-            <option value="4">Таблицы фиксированных программ</option>
-            <option value="5">Схема расположения детекторв</option>
-            <option value="6">Таблица детекторов</option>
-            <option value="7">Контроль периферийного оборудования</option>
-            <option value="8">Чередование фаз</option>
-            <option value="9">Таблицы адаптивных программ</option>
-          </select>
-          <select class="form-select" aria-label="Peek">
-            <option selected>Peek</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-          <select class="form-select" aria-label="Swarco">
-            <option selected>Swarco</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-          <select class="form-select" aria-label="Поток">
-            <option selected>Поток</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-          <select class="form-select" aria-label="Sice">
-            <option selected>Sice</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-          <select class="form-select" aria-label="Сигнал">
-            <option selected>Сигнал</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
-        </div>
+    {% include 'prog_sidebar.html' %} 
+    <div class="col-md-9">
 
-        <!-- Правая часть страницы - текстовое описание -->
-        <div class="col-md-9">
-          <p>Здесь будет текстовое описание выбранной темы.</p>
-        </div>
-      </div>
+      {% block page_content %}
+      {% endblock %}
+
     </div>
-    
-    <script>
-      function toggleSubtopics(li) {
-        const subtopics = li.nextElementSibling;
-        subtopics.classList.toggle("hidden");
-      }
-    </script>
+  </div>
+</div>
+
 {% endblock %}

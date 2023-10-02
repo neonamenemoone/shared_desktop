@@ -7,4 +7,5 @@ app_name = "prog"
 
 urlpatterns = [
     path("", views.prog, name="prog"),
+    path("equipment_layout/", views.equipment_layout, name="equipment_layout"),
 ]

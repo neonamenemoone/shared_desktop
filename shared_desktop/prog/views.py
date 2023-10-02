@@ -9,3 +9,8 @@ def prog(request):
         "prog": prog,
     }
     return render(request, template, context)
+
+def equipment_layout(request):
+    """Схема расположения оборудования."""
+    template = "prog/equipment_layout.html"
+    return render(request, template)
