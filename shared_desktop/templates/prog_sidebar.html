@@ -1,27 +1,92 @@
-
 <div class="col-md-3">
     <div class="accordion" id="passportAccordion">
-        <div class="accordion-item">
+
+        <!-- Паспорт -->
+        <div class="accordion-item ">
           <h2 class="accordion-header" id="passportHeading">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#passportCollapse" aria-expanded="false" aria-controls="passportCollapse">
               Паспорт
             </button>
           </h2>
-          <div id="passportCollapse" class="accordion-collapse collapse show" aria-labelledby="passportHeading">
+          <div id="passportCollapse" class="accordion-collapse collapse" aria-labelledby="passportHeading">
             <div class="accordion-body">
               <ul class="list-unstyled fw-normal pb-1 small">
-                <li><a href="{% url 'prog:equipment_layout' %}"class="d-inline-flex align-items-center rounded active" aria-current="page" title="Начните работу с Bootstrap">Схема расположения оборудования</a></li>
-                <li><a href="/docs/5.0/getting-started/download/" class="d-inline-flex align-items-center rounded" title="Получить Bootstrap">Таблица направлений</a></li>
-                <li><a href="/docs/5.0/getting-started/contents/" class="d-inline-flex align-items-center rounded" title="Что включено">Изображения фаз</a></li>
-                <li><a href="/docs/5.0/getting-started/browsers-devices/" class="d-inline-flex align-items-center rounded" title="Узнайте о браузерах и устройствах">Таблицы фиксированных программ</a></li>
-                <li><a href="/docs/5.0/getting-started/javascript/" class="d-inline-flex align-items-center rounded" title="Оживите Bootstrap">Схема расположения детекторов</a></li>
-                <li><a href="/docs/5.0/getting-started/build-tools/" class="d-inline-flex align-items-center rounded" title="Сценарии npm">Таблица детекторов</a></li>
-                <li><a href="/docs/5.0/getting-started/webpack/" class="d-inline-flex align-items-center rounded" title="Сборщики">Контроль периферийного оборудования</a></li>
-                <li><a href="/docs/5.0/getting-started/parcel/" class="d-inline-flex align-items-center rounded" title="Parcel">Чередование фаз</a></li>
-                <li><a href="/docs/5.0/getting-started/accessibility/" class="d-inline-flex align-items-center rounded" title="Возможности и ограничения">Таблицы адаптивных программ</a></li>
+                <li><a href="{% url 'prog:equipment_layout' %}"class="d-inline-flex align-items-center rounded active" >Схема расположения оборудования</a></li>
+                <li><a href="{% url 'prog:equipment_layout' %}" class="d-inline-flex align-items-center rounded" >Таблица направлений</a></li>
+                <li><a href="{% url 'prog:equipment_layout' %}" class="d-inline-flex align-items-center rounded" >Изображения фаз</a></li>
+                <li><a href="{% url 'prog:equipment_layout' %}" class="d-inline-flex align-items-center rounded" >Таблицы фиксированных программ</a></li>
+                <li><a href="{% url 'prog:equipment_layout' %}" class="d-inline-flex align-items-center rounded" >Схема расположения детекторов</a></li>
+                <li><a href="{% url 'prog:equipment_layout' %}" class="d-inline-flex align-items-center rounded" >Таблица детекторов</a></li>
+                <li><a href="{% url 'prog:equipment_layout' %}" class="d-inline-flex align-items-center rounded" >Контроль периферийного оборудования</a></li>
+                <li><a href="{% url 'prog:equipment_layout' %}" class="d-inline-flex align-items-center rounded" >Чередование фаз</a></li>
+                <li><a href="{% url 'prog:equipment_layout' %}" class="d-inline-flex align-items-center rounded" >Таблицы адаптивных программ</a></li>
               </ul>
             </div>
           </div>
         </div>
+
+        <!-- Peek -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="peekHeading">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#peekCollapse" aria-expanded="false" aria-controls="peekCollapse">
+                  Peek
+              </button>
+          </h2>
+          <div id="peekCollapse" class="accordion-collapse collapse" aria-labelledby="peekHeading">
+              <div class="accordion-body">
+                  <ul class="list-unstyled fw-normal pb-1 small">
+                      <!-- Добавьте пункты для Peek здесь -->
+                  </ul>
+              </div>
+          </div>
+      </div>
+
+      <!-- Swarco -->
+      <div class="accordion-item">
+          <h2 class="accordion-header" id="swarcoHeading">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#swarcoCollapse" aria-expanded="false" aria-controls="swarcoCollapse">
+                  Swarco
+              </button>
+          </h2>
+          <div id="swarcoCollapse" class="accordion-collapse collapse" aria-labelledby="swarcoHeading">
+              <div class="accordion-body">
+                  <ul class="list-unstyled fw-normal pb-1 small">
+                      <!-- Добавьте пункты для Swarco здесь -->
+                  </ul>
+              </div>
+          </div>
+      </div>
+
+      <!-- Поток -->
+      <div class="accordion-item">
+          <h2 class="accordion-header" id="potokHeading">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#potokCollapse" aria-expanded="false" aria-controls="potokCollapse">
+                  Поток
+              </button>
+          </h2>
+          <div id="potokCollapse" class="accordion-collapse collapse" aria-labelledby="potokHeading">
+              <div class="accordion-body">
+                  <ul class="list-unstyled fw-normal pb-1 small">
+                      <!-- Добавьте пункты для Потока здесь -->
+                  </ul>
+              </div>
+          </div>
       </div>
   </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      // Получаем текущий URL страницы
+      var currentUrl = window.location.pathname;
+
+      // Проверяем, находится ли текущий URL в категории "prog/passport/"
+      if (currentUrl.indexOf('/prog/passport/') === 0) {
+          // Если да, то добавляем класс "show" к аккордеону
+          var passportCollapse = document.getElementById('passportCollapse');
+          if (passportCollapse) {
+              passportCollapse.classList.add('show');
+          }
+      }
+  });
+</script>

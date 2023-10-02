@@ -22,7 +22,6 @@
               <a class="nav-link" href="{% url 'prog:prog' %}">Программирование ДК</a>
             {% endif %}
           </li>
-          {% if user.is_authenticated %}
           <li class="nav-item"> 
             {% if request.path == '/tools/' %}
               <a class="nav-link active" href="{% url 'tools:tools' %}">Инструменты</a>
@@ -30,6 +29,7 @@
               <a class="nav-link" href="{% url 'tools:tools' %}">Инструменты</a>
             {% endif %}
           </li>
+          {% if user.is_authenticated %}
           <li class="nav-item"> 
               <a class="nav-link link-light" href="{% url 'users:logout' %}">Выйти</a>
           </li>
