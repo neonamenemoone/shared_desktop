@@ -6,5 +6,6 @@ from . import views
 app_name = "tools"
 
 urlpatterns = [
-    path("", views.prog, name="tools"),
+    path("", views.tools, name="tools"),
+    path("tools/calculate_cycle/", views.calculate_cycle, name="calculate_cycle"),
 ]

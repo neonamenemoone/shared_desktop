@@ -1,27 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <div class="container">
   <div class="row">
     <div class="container">
       <div class="row">
-        <!-- Левая часть страницы - список тем -->
-        <div class="col-md-3">
-          <ul class="list-group">
-            <li class="list-group-item" onclick="toggleSubtopics(this)">Калькулятор времени цикла</li>
-            <li class="list-group-item" onclick="toggleSubtopics(this)">Калькулятор конфликтов</li>
-            <li class="list-group-item" onclick="toggleSubtopics(this)">Техническая координация</li>
-          </ul>
-        </div>
-        <!-- Правая часть страницы - текстовое описание -->
+
+        {% include 'tools_sidebar.html' %}
+
+        <!-- Правая часть страницы -->
         <div class="col-md-9">
           <p>Здесь будет интерфейс выбранной утилиты.</p>
         </div>
+
       </div>
     </div>
-    <script>
-      function toggleSubtopics(li) {
-        const subtopics = li.nextElementSibling;
-        subtopics.classList.toggle("hidden");
-      }
-    </script>
+  </div>
+</div>
+
+<script>
+  function toggleSubtopics(li) {
+    const subtopics = li.nextElementSibling;
+    subtopics.classList.toggle("hidden");
+  }
+</script>
+
 {% endblock %}
