@@ -7,5 +7,5 @@ app_name = "tools"
 
 urlpatterns = [
     path("", views.tools, name="tools"),
-    path("tools/calculate_cycle/", views.calculate_cycle, name="calculate_cycle"),
+    path("calculate_cycle/", views.calculate_cycle, name="calculate_cycle"),
 ]
