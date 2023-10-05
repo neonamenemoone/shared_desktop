@@ -1,7 +1,10 @@
 {% load static %}
+
 <!DOCTYPE html> 
-<html lang="ru">          
+<html lang="ru">
+
   <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{% static 'img/fav/fav.ico' %}" type="image">
@@ -12,21 +15,27 @@
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="{% static 'css/bootstrap_.css' %}"> 
     <title>Общий рабочий стол</title>    
+
   </head>
+
   <body data-bs-theme="dark">
+
     <header>
       {% include 'includes/header.html' %}
     </header>
-      <main>
-        {% comment %} <div class="container rounded bg-primary border p-1"> {% endcomment %}
-          {% block content %}
-            <h1>{{ text }}</h1>
-          {% endblock %}
-        {% comment %} </div> {% endcomment %}
-      </main>
-    <footer>
-      {% include 'includes/footer.html' %} 
+
+    <main>
+        {% block content %}
+          <h1>{{ text }}</h1>
+        {% endblock %}
+    </main>
+
+    <footer style="position: fixed; bottom: 0; width: 100%;">
+      {% include 'includes/footer.html' %}
     </footer>
+
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
   </body>
+
 </html>

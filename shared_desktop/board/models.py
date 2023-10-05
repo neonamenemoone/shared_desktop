@@ -14,6 +14,8 @@ class Rule(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="rules"
     )
+    responsible = models.TextField()
+    comment = models.TextField()
     on_main = models.BooleanField(default=True)
 
     class Meta:
