@@ -8,4 +8,5 @@ app_name = "tools"
 urlpatterns = [
     path("", views.tools, name="tools"),
     path("calculate_cycle/", views.calculate_cycle, name="calculate_cycle"),
+    path("technical_coordination/", views.technical_coordination, name="technical_coordination"),
 ]

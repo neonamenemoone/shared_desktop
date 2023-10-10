@@ -38,15 +38,15 @@
 
         {% if user.is_authenticated %}
 
-        <li class="nav-item"> 
+          <li class="nav-item"> 
             <a class="nav-link link-light" href="{% url 'users:logout' %}">Выйти</a>
-        </li>
+          </li>
 
         {% else %}
 
-        <li class="nav-item"> 
+          <li class="nav-item"> 
             <a class="nav-link link-light" href="{% url 'users:login' %}">Войти</a>
-        </li>
+          </li>
 
         {% endif %}
 
