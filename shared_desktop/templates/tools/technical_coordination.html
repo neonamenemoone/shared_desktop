@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-
 <div class="container">
   <div class="row">
     <div class="container">
@@ -11,39 +10,29 @@
         <!-- Правая часть страницы -->
         <div class="col-md-8">
 
-          <h1>Управление фазой контроллера</h1>
+          <h1>Техническая координация</h1>
           <p>Введите IP адрес контроллера, выберете фазу и включите управление</p>
-
+          
           <form method="post" class="form-inline">
             {% csrf_token %}
-
-            <div class="row">
-
-              <div class="col-md-3">
-                <input type="text" class="form-control" id="ip_address" name="ip_address" value="{{ ip_address }}" placeholder="IP адрес">
-              </div>
-
-              <div class="col-md-2">
-                <select class="form-control" id="phase_value" name="phase_value">
-                  {% for value, label in phase_values %}
-                    <option value="{{ value }}" {% if value == selected_phase %}selected{% endif %}>{{ label }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-
-              <div class="col-md-auto">
-                <button type="submit" class="btn btn-primary mb-2">Включить</button>
-              </div>
-
-              <div class="col-md-auto">
-                <a href="#" id="get_status_button" class="btn btn-secondary mb-2">Текущая фаза: {{ status }}</a>
-              </div>
-
-           </div>
+            {{ formset.management_form }}
+            {% for form in formset %}
+                <div class="row">
+                    <div class="col-md-auto">
+                        {{ form.ip_address }}
+                    </div>
+                    <div class="col-md-2">
+                        {{ form.phase_value }}
+                    </div>
+                    <div class="col-md-auto">
+                        <button type="submit" name="apply_button_{{ forloop.counter }}" class="btn btn-primary mb-2">Apply to Controller</button>
+                    </div>
+                </div>
+            {% endfor %}
           </form>
 
-          {% if error_message %}
-            <p style="color: red;">{{ error_message }}</p>
+          {% if error_messages %}
+            <p style="color: red;">{{ error_messages }}</p>
           {% endif %}
 
         </div>
@@ -52,18 +41,5 @@
     </div>
   </div>
 </div>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("get_status_button").addEventListener("click", function(event) {
-            event.preventDefault(); // Отменяет стандартное действие ссылки
-    
-            var ip_address = document.getElementById("ip_address").value;
-            var phase_value = document.getElementById("phase_value").value;
-            var url = "?get_status=1&ip_address=" + ip_address + "&phase_value=" + phase_value;
-    
-            // Переход по новому URL
-            window.location.href = url;
-        });
-    });
-</script>
+
 {% endblock %}

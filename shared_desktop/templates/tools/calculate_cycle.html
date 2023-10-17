@@ -17,9 +17,10 @@
 
           <form id="cycleCalculatorForm">
 
-            <div class="mb-3">
+            <div class="md-3">
               <label for="phaseCount" class="form-label">Количество фаз:</label>
-              <input type="number" class="form-control" id="phaseCount" name="phaseCount" min="1" max="20" oninput="createPhaseInputs()" placeholder="Не более 20 фаз">
+              <input type="number" class="form-control" id="phaseCount" name="phaseCount" min="1" max="20" oninput="createPhaseInputs()" placeholder="Не более 20 фаз" value="4">
+            <p></p>
             </div>
 
             <div id="phaseInputs">
@@ -36,6 +37,9 @@
 </div>
 
 <script>
+  window.addEventListener("load", function() {
+    createPhaseInputs();
+  });
   function createPhaseInputs() {
     const phaseCount = parseInt(document.getElementById("phaseCount").value);
 
