@@ -1,10 +1,13 @@
 import socket
+import ipaddress
 from django.http import JsonResponse
 from django.forms import modelformset_factory
 from django.shortcuts import render
 from pysnmp.hlapi import *
 from tools.forms import ControllerForm
 from tools.models import Central
+
+from pysnmp.entity.rfc3413.oneliner import cmdgen
 
 def is_valid_ip(ip_address):
     try:
@@ -125,47 +128,80 @@ def phase_control(request):
         }
     )
 
+
 def technical_coordination(request):
     """Техническая координация."""
     template = "tools/technical_coordination.html"
     community_string = "private"
     error_message = ""
-    ControllerFormSet = modelformset_factory(Central, form=ControllerForm, extra=8) 
+    num_controllers = int(request.POST.get('num_controllers', 8))
+    ControllerFormSet = modelformset_factory(Central, form=ControllerForm, extra=num_controllers)
+    formset = ControllerFormSet(queryset=Central.objects.none())
 
     if request.method == 'POST':
-        formset = ControllerFormSet(request.POST, queryset=Central.objects.none()) 
-
-        for form in formset:
-            if form.has_changed():
-                ip_address = form['ip_address'].value()
-                phase_value = int(form['phase_value'].value())
-                button_name = next(
-                    (k for k, v in request.POST.items() if k.startswith('apply_button_')),
-                    None
-                )
-                if button_name:
-                    form_number = int(button_name.replace('apply_button_', ''))
-                    if not is_valid_ip(ip_address):
-                        error_message = "Invalid IP Address"
-                    else:
-                        oid = ObjectIdentity("1.3.6.1.4.1.1618.3.7.2.11.1.0")
-
-                        error_indication, error_status, error_index, var_binds = next(
-                            setCmd(SnmpEngine(),
-                                CommunityData(community_string, mpModel=0),
-                                UdpTransportTarget((ip_address, 161)),
-                                ContextData(),
-                                ObjectType(oid, Unsigned32(phase_value))
-                            )
-                        )
-
-                        if error_indication:
-                            error_message = f"Ошибка: {error_indication}"
+        formset = ControllerFormSet(request.POST, queryset=Central.objects.none())
+        if formset.is_valid():
+            for form in formset:
+                if form.has_changed():
+                    ip_address = form['ip_address'].value()
+                    phase_value = int(form['phase_value'].value())
+                    apply_button_name = next(
+                        (k for k, v in request.POST.items() if k.startswith('apply_button_')),
+                        None
+                    )
+                    get_status_button_name = next(
+                        (k for k, v in request.POST.items() if k.startswith('get_status_button_')),
+                        None
+                    )
+                    
+                    if apply_button_name:
+                        # Обработка кнопки "включить"
+                        try:
+                            ipaddress.IPv4Address(ip_address)
+                        except ipaddress.AddressValueError:
+                            error_message = "Invalid IP Address"
                         else:
-                            error_message = None
+                            oid = ObjectIdentity("1.3.6.1.4.1.1618.3.7.2.11.1.0")
+                            error_indication, error_status, error_index, var_binds = next(
+                                setCmd(SnmpEngine(),
+                                    CommunityData(community_string, mpModel=0),
+                                    UdpTransportTarget((ip_address, 161)),
+                                    ContextData(),
+                                    ObjectType(oid, Unsigned32(phase_value))
+                                )
+                            )
+                            if error_indication:
+                                error_message = f"Ошибка: {error_indication}"
+                            else:
+                                error_message = None
+                    elif get_status_button_name:
+                        # Обработка кнопки "текущая фаза"
+                        form_number = int(get_status_button_name.rsplit('_', 1)[-1])
+                        if not is_valid_ip(ip_address):
+                            error_message = "Некорректный IP-адрес"
+                        else:
+                            command_oid = ObjectIdentity("1.3.6.1.4.1.1618.3.7.2.11.1.0")
+                            status_oid = ObjectIdentity("1.3.6.1.4.1.1618.3.7.2.11.2.0")
+                            error_indication, error_status, error_index, var_binds = next(
+                                getCmd(SnmpEngine(),
+                                    CommunityData(community_string),
+                                    UdpTransportTarget((ip_address, 161)),
+                                    ContextData(),
+                                    ObjectType(command_oid),
+                                    ObjectType(status_oid))
+                            )
+                            if error_indication:
+                                error_message = f"Ошибка: {error_indication}"
+                            else:
+                                command_value = var_binds[0][1].prettyPrint()
+                                status_value = var_binds[1][1].prettyPrint()
+                                if int(status_value) > 0:
+                                    status_value = str(int(status_value) - 1)
 
-        return render(request, template, {'formset': formset})
+                                # Обновление значения на кнопке в форме
+                                form.status_value = status_value
+
     else:
         formset = ControllerFormSet(queryset=Central.objects.none())
 
-    return render(request, template, {'formset': formset})
+    return render(request, template, {'formset': formset, 'error_message': error_message})

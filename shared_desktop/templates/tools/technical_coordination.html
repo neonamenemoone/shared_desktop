@@ -7,39 +7,107 @@
 
         {% include 'tools_sidebar.html' %}
 
-        <!-- Правая часть страницы -->
         <div class="col-md-8">
-
           <h1>Техническая координация</h1>
-          <p>Введите IP адрес контроллера, выберете фазу и включите управление</p>
-          
+          <p>
+            Введите IP адрес контроллера, выберете фазу и включите управление<br>
+          </p>
+          <div class="row">
+
+            <div class="col-md-7">
+              <label for="numControllersInput">Количество контроллеров:</label>
+              <input type="number" id="numControllersInput" name="num_controllers" class="form-control" value="8">
+            </div>
+
+            <div class="col-md-2">
+              <label for="enableIntervalInput">Таймаут:</label>
+              <input type="number" id="timeout" class="form-control" value="60">
+            </div>
+
+            <div class="col-md-3">
+              <label for="intervalInput">Интервал опроса:</label>
+              <input type="number" id="intervalInput" class="form-control" value="20">
+            </div>
+
+          </div>
+
+          <ul>
+          </ul>
+  
           <form method="post" class="form-inline">
             {% csrf_token %}
             {{ formset.management_form }}
             {% for form in formset %}
-                <div class="row">
-                    <div class="col-md-auto">
-                        {{ form.ip_address }}
-                    </div>
-                    <div class="col-md-2">
-                        {{ form.phase_value }}
-                    </div>
-                    <div class="col-md-auto">
-                        <button type="submit" name="apply_button_{{ forloop.counter }}" class="btn btn-primary mb-2">Apply to Controller</button>
-                    </div>
+              <div class="row">
+                
+                <div class="col-md-4">
+                    {{ form.ip_address }}
+                    {% if form.errors.ip_address %}
+                        <p style="color: red;">{{ form.errors.ip_address }}</p>
+                    {% endif %}
                 </div>
+    
+                <div class="col-md-3">
+                    {{ form.phase_value }}
+                    {% if form.phase_value.errors %}
+                        <p style="color: red;">{{ form.phase_value.errors }}</p>
+                    {% endif %}
+                </div>
+    
+                <div class="col-md-2">
+                  <button type="submit" name="apply_button_{{ forloop.counter }}" class="btn btn-primary mb-2">Включить</button>
+                </div>
+                
+                <div class="col-md-3">
+                    <button type="submit" name="get_status_button_{{ forloop.counter }}" class="btn btn-dark mb-2">Текущая фаза: {{ form.status_value }}</button>
+                </div>
+  
+              </div>
             {% endfor %}
-          </form>
+        </form>
 
-          {% if error_messages %}
-            <p style="color: red;">{{ error_messages }}</p>
+          {% if error_message %}
+            <p style="color: red;">{{ error_message }}</p>
           {% endif %}
 
         </div>
-
       </div>
     </div>
   </div>
 </div>
+
+<script>
+
+  
+  document.addEventListener("DOMContentLoaded", function() {
+    // Функция для симуляции нажатия кнопки "Текущая фаза"
+    function clickStatusButton(button) {
+      button.click();
+    }
+
+    // Получаем поле ввода интервала
+    var intervalInput = document.getElementById("intervalInput");
+
+    // Проверяем, есть ли сохраненное значение в localStorage
+    var savedInterval = localStorage.getItem("autoStatusInterval");
+
+    if (savedInterval) {
+      intervalInput.value = savedInterval;
+    }
+
+    // Сохраняем значение в localStorage при изменении
+    intervalInput.addEventListener("input", function() {
+      localStorage.setItem("autoStatusInterval", intervalInput.value);
+    });
+
+    {% for form in formset %}
+      var statusButton{{ forloop.counter }} = document.querySelector("button[name='get_status_button_{{ forloop.counter }}'");
+      
+      setInterval(function() {
+        clickStatusButton(statusButton{{ forloop.counter }});
+      }, intervalInput.value * 1000); // Преобразуем секунды в миллисекунды
+    {% endfor %}
+  });
+</script>
 
 {% endblock %}
