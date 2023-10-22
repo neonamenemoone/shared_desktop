@@ -7,7 +7,7 @@ class Central(models.Model):
     ip_address = models.GenericIPAddressField(
         verbose_name='IP Address',
         protocol='both',
-        unique=True
+        unique=True,
     )
     phase_value = models.PositiveSmallIntegerField(
         verbose_name='phase_value',
@@ -21,7 +21,8 @@ class Central(models.Model):
             (7, '6 фаза'),
             (8, '7 фаза'),
             (1, '0 фаза'),
-        ]
+        ],
+        default=0
     )
 
     def __str__(self):

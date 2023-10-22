@@ -32,7 +32,7 @@
               </div>
 
               <div class="col-md-2">
-                <input type="number" class="form-control" id="timeout" name="timeout" min="60" max="300" value="60" placeholder="Таймаут (сек)">
+                <input type="number" class="form-control" id="timeout" name="timeout" min="60" max="300" value="60" placeholder="Таймаут (сек)" disabled>
               </div>
               
               <div class="col-md-auto">
@@ -40,7 +40,7 @@
               </div>
 
               <div class="col-md-auto">
-                <button type="submit" id="get_status_button" class="btn btn-secondary mb-2">Текущая фаза: {{ status }}</button>
+                <button type="submit" id="get_status_button" class="btn btn-dark mb-2">Текущая фаза: {{ status }}</button>
               </div>
 
            </div>

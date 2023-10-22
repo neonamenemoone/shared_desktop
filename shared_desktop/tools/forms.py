@@ -16,13 +16,12 @@ class ControllerForm(forms.ModelForm):
         model = Central
         fields = ['ip_address', 'phase_value']
         widgets = {
-            'ip_address': forms.TextInput(attrs={'class': 'form-control'}),
+            'ip_address': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'IP адрес'}),
             'phase_value': forms.Select(attrs={'class': 'form-control'}),
         }
 
 class CustomControllerForm(ControllerForm):
 
-    
     def clean_ip_address(self):
         ip_address = self.cleaned_data.get('ip_address')
         if not is_valid_ip(ip_address):

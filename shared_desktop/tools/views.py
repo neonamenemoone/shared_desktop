@@ -4,17 +4,11 @@ from django.http import JsonResponse
 from django.forms import modelformset_factory
 from django.shortcuts import render
 from pysnmp.hlapi import *
-from tools.forms import ControllerForm
+from tools.forms import ControllerForm, is_valid_ip
 from tools.models import Central
 
 from pysnmp.entity.rfc3413.oneliner import cmdgen
 
-def is_valid_ip(ip_address):
-    try:
-        socket.inet_pton(socket.AF_INET, ip_address)
-        return True
-    except socket.error:
-        return False
 
 def tools(request):
     """Инструменты."""
@@ -193,12 +187,11 @@ def technical_coordination(request):
                             if error_indication:
                                 error_message = f"Ошибка: {error_indication}"
                             else:
-                                command_value = var_binds[0][1].prettyPrint()
+
                                 status_value = var_binds[1][1].prettyPrint()
                                 if int(status_value) > 0:
                                     status_value = str(int(status_value) - 1)
 
-                                # Обновление значения на кнопке в форме
                                 form.status_value = status_value
 
     else:
