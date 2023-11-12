@@ -1,13 +1,14 @@
-import socket
 import ipaddress
-from django.http import JsonResponse
-from django.forms import modelformset_factory
-from django.shortcuts import render
+import logging
+
 from pysnmp.hlapi import *
 from tools.forms import ControllerForm, is_valid_ip
 from tools.models import Central
 
-from pysnmp.entity.rfc3413.oneliner import cmdgen
+from django.forms import modelformset_factory
+from django.http import JsonResponse
+from django.shortcuts import render
+
 
 
 def tools(request):
@@ -198,3 +199,11 @@ def technical_coordination(request):
         formset = ControllerFormSet(queryset=Central.objects.none())
 
     return render(request, template, {'formset': formset, 'error_message': error_message})
+
+
+logger = logging.getLogger(__name__)
+
+
+def block_swarco(request):
+
+    return render(request, 'tools/block_swarco.html')

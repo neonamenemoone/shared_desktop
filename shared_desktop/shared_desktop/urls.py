@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django.urls import include, path
 
+
 urlpatterns = [
     path("", include("board.urls")),
     path("prog/", include("prog.urls")),

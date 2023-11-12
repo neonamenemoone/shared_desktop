@@ -1,18 +1,23 @@
 import os
 
+
 # Путь к файлу настроек Django проекта
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "shared_desktop.settings")
 
 # Загрузка настроек Django
 import django
 
+
 django.setup()
 
-from board.models import Rule
 from dotenv import load_dotenv
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import (CallbackQueryHandler, CommandHandler, Filters,
-                          MessageHandler, Updater)
+from telegram.ext import (
+    CallbackQueryHandler, CommandHandler, Filters, MessageHandler, Updater,
+)
+
+from board.models import Rule
+
 
 load_dotenv()
 
